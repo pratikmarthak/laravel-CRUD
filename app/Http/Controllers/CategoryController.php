@@ -35,7 +35,7 @@ class CategoryController extends Controller
         //dd($request->all());
         $validatedData = $request->validate([
             'user_id' => 'nullable|integer',
-            'category_id' => 'required|integer',
+            'category_id' => 'required|integer|unique:categories,category_id',
             'name' => 'required|string|max:255',
         ]);
 

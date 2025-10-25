@@ -24,7 +24,7 @@
                                 @foreach($categories as $category)
                                 <tr>
                                     <th scope="row">{{ $category->id }}</th>
-                                    <td>{{ $category->user_id }}</td>
+                                    <td>{{ $category->user->name }}</td>
                                     <td>{{ $category->category_id }}</td>
                                     <td>{{ $category->name }}</td>
                                 </tr>
