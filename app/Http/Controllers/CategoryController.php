@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -31,13 +31,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
-        //dd($request->all());
         $validatedData = $request->validate([
             'user_id' => 'nullable|integer',
             'category_id' => 'required|integer|unique:categories,category_id',
             'name' => 'required|string|max:255',
         ]);
+        //dd($request->all());
 
         $data =new Category();
         $data->user_id = Auth::user()->id;
@@ -90,6 +89,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }
