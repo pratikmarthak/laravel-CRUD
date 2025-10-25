@@ -18,6 +18,7 @@
                                     <th scope="col">User ID</th>
                                     <th scope="col">Category ID</th>
                                     <th scope="col">Category Name</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -27,6 +28,9 @@
                                     <td>{{ $category->user->name }}</td>
                                     <td>{{ $category->category_id }}</td>
                                     <td>{{ $category->name }}</td>
+                                    <td>
+                                        <a href="{{ route('categories.edit',$category->id) }}" class="btn btn-info">Edit</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -55,6 +59,11 @@
                                 @error('name')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                
+    
                             </div>
                             <button type="submit" class="btn btn-primary">Add Category</button>
                     </div>
