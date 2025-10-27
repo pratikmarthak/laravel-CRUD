@@ -50,9 +50,6 @@
                     <div class="card-body text-center">
                     <a href="{{ route('categories.create') }}" class="btn btn-dark">Add Category</a>
                     </div>
-
-                    
-                    
                 </div>
             </div>
         </div>
