@@ -63,23 +63,32 @@ class BrandController extends Controller
             $up_location = 'images/brand/';
             $last_img = $up_location.$img_name;
             $brand_image->move($up_location,$img_name);
-            
+
             unlink($old_image);
             //dd($request->all());
             Brand::find($id)->update([
                 'brand_name' => $request->brand_name,
                 'brand_logo' => $last_img,
             ]);
-    
+
             return redirect()->back()->with('success','Brand Updated Successfully');
         }
         else{
             Brand::find($id)->update([
                 'brand_name' => $request->brand_name,
             ]);
-    
+
             return redirect()->back()->with('success','Brand Updated Successfully');
         }
 
+    }
+
+    public function delete($id){
+        $brand = Brand::findOrFail($id);
+        $img = $brand->brand_logo;
+        unlink($img);
+
+        Brand::findOrFail($id)->delete();
+        return redirect()->back()->with('success','Brand Deleted Successfully');
     }
 }

@@ -45,13 +45,8 @@
                                         <td>
                                             <a href="{{ route('brand.edit', $brand->id) }}"
                                                 class="btn btn-info">Edit</a>
-                                            <form action="{{ route('categories.destroy', $brand->id) }}" method="POST"
-                                                style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
-                                            </form>
+                                            <a href="{{ route('brand.delete', $brand->id) }}" class="btn btn-danger"
+                                                onclick="return confirm('Are you sure to delete?')">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
