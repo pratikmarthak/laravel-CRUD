@@ -18,7 +18,7 @@
             </div>
         </div>
     @endsession  --}}
-   
+
 
     <div class="container">
         <div class="row">
@@ -43,14 +43,15 @@
                                         <td><img src="{{ asset($brand->brand_logo) }}" alt="{{ $brand->brand_name }}"
                                                 style="width: 70px; height: 50px;"></td>
                                         <td>
-                                            <a href="{{ route('categories.edit', $brand->id) }}"
+                                            <a href="{{ route('brand.edit', $brand->id) }}"
                                                 class="btn btn-info">Edit</a>
-                                            <form action="{{ route('categories.destroy', $brand->id) }}"
-                                                method="POST" style="display:inline-block;">
+                                            <form action="{{ route('categories.destroy', $brand->id) }}" method="POST"
+                                                style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger"
                                                     onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -85,6 +86,7 @@
                             <div class="mb-3">
                             </div>
                             <button type="submit" class="btn btn-primary">Add Brand</button>
+                        </form>
                     </div>
                 </div>
             </div>

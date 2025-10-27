@@ -34,6 +34,7 @@
     
                             </div>
                             <button type="submit" class="btn btn-primary">Add Category</button>
+                        </form>
                     </div>
                 </div>
             </div>

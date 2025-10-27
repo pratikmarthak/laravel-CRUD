@@ -30,3 +30,5 @@ Route::delete('categories/delete/{id}',[CategoryController::class,'destroy'])->n
 // BrandController Routes
 Route::get('brands/all',[BrandController::class,'index'])->name('brands.index');
 Route::post('brands/store',[BrandController::class,'store'])->name('brands.store');
+Route::get('brands/edit/{id}',[BrandController::class,'edit'])->name('brand.edit');
+Route::put('brands/update/{id}',[BrandController::class,'update'])->name('brand.update');
