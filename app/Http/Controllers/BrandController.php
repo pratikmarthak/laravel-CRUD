@@ -13,12 +13,13 @@ class BrandController extends Controller
         return view('brands.index', compact('brands'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         //dd($request->all());
         $request->validate([
             'brand_name' => 'required|unique:brands|max:255',
             'brand_logo' => 'required|mimes:jpg,jpeg,png',
-        ],[
+        ], [
             'brand_name.required' => 'Please Input Brand Name',
             'brand_name.max' => 'Brand Less Then 255Chars',
         ]);
@@ -26,10 +27,10 @@ class BrandController extends Controller
         $brand_image = $request->file('brand_logo');
         $img_gen = hexdec(uniqid());
         $img_ext = strtolower($brand_image->getClientOriginalExtension());
-        $img_name = $img_gen.'.'.$img_ext;
+        $img_name = $img_gen . '.' . $img_ext;
         $up_location = 'images/brand/';
-        $last_img = $up_location.$img_name;
-        $brand_image->move($up_location,$img_name);
+        $last_img = $up_location . $img_name;
+        $brand_image->move($up_location, $img_name);
 
         //dd($request->all());
         Brand::insert([
@@ -37,32 +38,35 @@ class BrandController extends Controller
             'brand_logo' => $last_img,
         ]);
 
-        return redirect()->back()->with('success','Brand Inserted Successfully');
+        return redirect()->back()->with('success', 'Brand Inserted Successfully');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $brand = Brand::findOrFail($id);
-        return view('brands.edit',compact('brand'));
+        return view('brands.edit', compact('brand'));
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $validatedData = $request->validate([
             'brand_name' => 'required|max:255',
-        ],[
+            'brand_logo' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ], [
             'brand_name.required' => 'Please Input Brand Name',
             'brand_name.max' => 'Brand Less Then 255 Chars',
         ]);
 
         $old_image = $request->old_logo;
+        $brand_image = $request->file('brand_logo');
 
-        if($request->file('brand_logo')){
-            $brand_image = $request->file('brand_logo');
+        if ($brand_image) {
             $img_gen = hexdec(uniqid());
             $img_ext = strtolower($brand_image->getClientOriginalExtension());
-            $img_name = $img_gen.'.'.$img_ext;
+            $img_name = $img_gen . '.' . $img_ext;
             $up_location = 'images/brand/';
-            $last_img = $up_location.$img_name;
-            $brand_image->move($up_location,$img_name);
+            $last_img = $up_location . $img_name;
+            $brand_image->move($up_location, $img_name);
 
             unlink($old_image);
             //dd($request->all());
@@ -71,24 +75,23 @@ class BrandController extends Controller
                 'brand_logo' => $last_img,
             ]);
 
-            return redirect()->back()->with('success','Brand Updated Successfully');
-        }
-        else{
+            return redirect()->back()->with('success', 'Brand Updated Successfully');
+        } else {
             Brand::find($id)->update([
                 'brand_name' => $request->brand_name,
             ]);
 
-            return redirect()->back()->with('success','Brand Updated Successfully');
+            return redirect()->back()->with('success', 'Brand Updated Successfully');
         }
-
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $brand = Brand::findOrFail($id);
         $img = $brand->brand_logo;
         unlink($img);
 
         Brand::findOrFail($id)->delete();
-        return redirect()->back()->with('success','Brand Deleted Successfully');
+        return redirect()->back()->with('success', 'Brand Deleted Successfully');
     }
 }

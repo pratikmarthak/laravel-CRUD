@@ -12,6 +12,13 @@
                 <div class="card">
                     <div class="card-header text-center">Add Category</div>
                     <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
                         <form action="{{ route('categories.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
@@ -30,8 +37,8 @@
                             </div>
 
                             <div class="mb-3">
-                                
-    
+
+
                             </div>
                             <button type="submit" class="btn btn-primary">Add Category</button>
                         </form>

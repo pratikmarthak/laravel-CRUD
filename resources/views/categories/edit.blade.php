@@ -9,6 +9,12 @@
         <div class="row">
             <div class="col-md-8 pt-4">
                 <div class="card">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('success') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="card-header text-center">Update Category</div>
                     <div class="card-body">
                         <form action="{{ route('categories.update',$category->id) }}" method="POST">
@@ -30,15 +36,15 @@
                             </div>
 
                             <div class="mb-3">
-                                
-    
+
+
                             </div>
                             <button type="submit" class="btn btn-primary">Update Category</button>
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
 
