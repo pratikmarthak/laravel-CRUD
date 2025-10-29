@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MultiPicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,7 @@ Route::post('brands/store',[BrandController::class,'store'])->name('brands.store
 Route::get('brands/edit/{id}',[BrandController::class,'edit'])->name('brand.edit');
 Route::put('brands/update/{id}',[BrandController::class,'update'])->name('brand.update');
 Route::get('brands/delete/{id}',[BrandController::class,'delete'])->name('brand.delete');
+
+// MultiPicController Routes
+Route::get('multipic/all',[MultiPicController::class,'index'])->name('multipic.index');
+Route::post('multipic/store',[MultiPicController::class,'store'])->name('multipic.store');
